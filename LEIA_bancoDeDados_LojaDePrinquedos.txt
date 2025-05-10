@@ -1,0 +1,56 @@
+NOTAS PARA A CONSTRUÇÃO DO BANCO DE DADOS - CATÁLOGO DE BRINQUEDOS
+
+NOME DO PROJETO:
+		Catalogo de brinquedos	
+
+	DESCRIÇÃO DO PROJETO:
+		Projeto Interdisciplinas das matérias de Banco de dados não relacional, Interação Computador e Humano e Desenvolvimento de web III.
+		Neste projeto tem como princípio a prática de uso das ferramentas e técnicas como MongoDB e seu CRUD em relação a coleções e campos, usabilidade, acessibilidade e responsividade do site, e o uso de Java como ferramenta de Back-end.
+
+	
+	CONDIÇÕES E/OU RESTRIÇÕES:
+		Area para inclusão, alteração e exclusão de produtos.
+		* Area administrativa com acesso logado.
+		Sem restrições na regra de negócio.
+
+	Estrutura de banco de dados - em 04/12/2023 - teste da classe categoria:
+//nome do banco de dados: catalogoBrinquedo1
+//porta do mongodb: 27017
+//host: localhost
+ 
+db.createCollection("Categoria")
+db.Categorias.insert({id: valor1, codcat:valor2, nome:valor3, linha:Valor4, idade:Valor5, nomeImagem:Valor6})
+
+
+
+
+	COLEÇÃO USUARIOS:
+		Dados que serão guardados:
+
+			//criação da coleção
+			db.createCollection("usuarios")
+			
+			//Criação dos campos
+			db.usuarios.insert({Codigo usuario: valor1, Nome usuario:valor2, Sexo:valor3,Email:Valor4,Senha:valor5})
+
+			COD do usuário, Nome do usuário, Sexo, email (login),senha.
+
+	COLEÇÃO PRODUTOS:
+		        //criação da coleção
+			db.createCollection("produtos")
+			
+			//Criação dos campos
+			db.produtos.insert({Codigo produto: valor1, produto:valor2, preco:valor3,categoria:Valor4,descrição:valor5})
+		Dados que serão guardados:
+		        Código do produto, Produto, Preço, Categoria, Descrição.
+
+	COLEÇÃO CATEGORIA:
+
+			//criação da coleção
+			db.createCollection("categorias")
+			
+			//Criação dos campos
+			db.categorias.insert({Categoria: valor1, codigo produto:valor2, linha:valor3,faixa etaria:Valor4})
+		
+		Dados que serçao guardados
+			Nome da categoria, Código, Linha, Faixa etária.

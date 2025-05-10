@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+//<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Aplicação Loja de Brinquedos">
+  <meta name="keywords" content="HTML, CSS, flexbox, JavaScript">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja de Brinquedos</title>
+</head>
+
+<style>* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  header {
+    background-color: #6f4558; /*Cor de fundo*/
+    color: white; /*Cor texto*/
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header img {
+    width: 70px; 
+    height: auto;
+  }
+  
+  .logo-name {
+    text-align: center;
+  }
+  
+  .login-area {
+    display: flex;
+    align-items: center;
+  }
+  
+  .login-input {
+    margin-right: 10px;
+  }
+  
+  .login-button {
+    padding: 5px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menu-icon {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #b395b9;
+    padding: 20px;
+    display: block;
+  }
+  
+  .sidebar a {
+    text-decoration: none; /*Remove sublinhado */
+    color: #333; /*cor do texto */
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #d8bfd8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .flexbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .main-content-item {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #604a8c;
+    background-color: #ffffe0;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .main-content-item a {
+    text-decoration: none;
+    color: #333; /*cor do texto */
+  }
+  
+  .product-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .product {
+    flex: calc(33.33% - 20px); /* 33.33% de largura com 20px de margem */
+    background-color: #ffffe0;
+    border: 1px solid #604a8c;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /*Centraliza o conteúdo */
+    text-align: center;
+  }
+  
+  .product img {
+    max-width: 100%; /*Ajusta a largura da imagem para não ultrapassar o contêiner */
+    height: auto; /*Mantém a proporção da imagem */
+  }
+  
+  .product a {
+    text-decoration: none; /*Remover sublinhado */
+    color: #333; /*Definir cor do texto */
+  }
+  
+  footer {
+    background-color: #6f4558;
+    color: white;
+    text-align: center;
+    padding: 60px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none; /*Remove marcadores de lista */
+    padding: 0; /*Remove o espaçamento padrão da lista */
+  }
+  
+  .sidebar ul ul {
+    padding-left: 20px; /*Adiciona um recuo para subníveis da lista */
+  }
+  
+  .sidebar a {
+    text-decoration: none; /*Remove sublinhado */
+    color: #333; /*Cor do texto */
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none; /*Oculta a barra lateral em telas menores */
+    }
+  
+    .menu-icon {
+      display: block; /*Exibe o ícone do menu */
+    }
+  
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .login-area {
+      margin-top: 10px;
+    }
+  
+    .product {
+      flex: calc(50% - 20px); /* Duas colunas em telas menores */
+    }
+  }</style>
+
+<body>
+  <header>
+    <div>
+      <img src="img/logoTeste.png" alt="Logo">
+    </div>
+    <div class="logo-name">
+      <h1>Loja de Brinquedos</h1>
+    </div>
+    <div class="login-area">
+      <input type="text" class="login-input" placeholder="Usuário">
+      <button class="login-button">Login</button>
+    </div>
+    <div class="menu-icon" onclick="toggleSidebar()">
+      &#9776; <!-- Unicode para o ícone de menu -->
+    </div>
+  </header>
+
+  <div style="display: flex;">
+    <div class="sidebar" id="sidebar">
+      <!-- Conteúdo da barra lateral -->
+      <ul>
+        <li><a href="index.html"><h4>HOME</h4></a></li>
+        <li><a href="index.html"><h4>CATEGORIAS</h4></a>
+        <ul>
+          <li><a href="index.html" onclick="carregarGaleria('todas')">Todas</a></li>
+          <li><a href="index.html" onclick="carregarGaleria('bonecas')">Bonecas</a></li>
+          <li><a href="index.html" onclick="carregarGaleria('caminhoes')">Caminhões</a></li>
+          <li><a href="index.html" onclick="carregarGaleria('cozinhas')">Cozinhas</a></li>
+          <li><a href="index.html" onclick="carregarGaleria('helicopteros')">Helicópteros</a></li>
+          <li><a href="index.html" onclick="carregarGaleria('jogos')">Jogos</a></li>
+          <li><a href="index.html" onclick="carregarGaleria('motos')">Motos</a></li>
+          <li><a href="index.html" onclick="carregarGaleria('Praia')">Praia</a></li>
+          <li><a href="index.html" onclick="carregarGaleria('tratores')">Tratores</a></li>
+        </ul></li>
+
+        <li><a href="pesquisaprodutos.html"><h4>PRODUTOS</h4></a>
+        <ul>
+          <li><a href="pesquisaprodutos.html">Consular Produto</a></li>
+          <li><a href="pesquisaprodutos.html">Listar Produtos</a></li>
+        </ul></li>
+
+        <li><a href="areaadministrativa.html"><h4>AREA ÁDMINISTRATIVA</h4></a>
+        <ul>
+          <li><a href="areaadministrativa_inserir.html">Inserir Produto</a></li>
+          <li><a href="areaAdministrativa_alterar.html">Alterar Produto</a></li>
+          <li><a href="areaAdministrativa_excluir.html">Excluir Produto</a></li>
+        </ul></li>
+    </div>
+
+    <div class="main-content">
+      <!-- Conteúdo principal deve ser inserido aqui -->
+      <div class="flexbox">
+        <div class="main-content-item">
+          <a href="index.html">
+            <h2>Home</h2>
+            <p>Conteúdo da Home</p>
+          </a>
+        </div>
+        <div class="main-content-item">
+          <a href="produtos.html">
+            <h2>Produtos</h2>
+            <p>Conteúdo de Produtos</p>
+          </a>
+        </div>
+        <div class="main-content-item">
+          <a href="areaadministrativa.html">
+            <h2>Área Administrativa</h2>
+            <p>Conteúdo da Área Administrativa</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Galeria de Produtos -->
+      <div class="product-gallery">
+        <div class="product">
+          <a href="DetalhesProduto.html">
+            <h3>Nome do produto</h3>
+            <img src="img/img1.jpg" alt="Produto 1">
+            <p>Descrição do Produto 1</p>
+            <p>R$ 000,00</p>
+          </a>
+        </div>
+        <div class="product">
+          <a href="DetalhesProduto.html">
+            <h3>Nome do produto</h3>
+            <img src="img/img2.jpg" alt="Produto 2">
+            <p>Descrição do Produto 2</p>
+            <p>R$ 000,00</p>
+          </a>
+        </div>
+        <div class="product">
+          <a href="DetalhesProduto.html">
+            <h3>Nome do produto</h3>
+            <img src="img/img7.jpg" alt="Produto 3">
+            <p>Descrição do Produto 3</p>
+            <p>R$ 000,00</p>
+          </a>
+        </div>
+        <div class="product">
+          <a href="DetalhesProduto.html">
+            <h3>Nome do produto</h3>
+            <img src="img/img10.jpg" alt="Produto 4">
+            <p>Descrição do Produto 4</p>
+            <p>R$ 000,00</p>
+          </a>
+        </div>
+        <div class="product">
+          <a href="DetalhesProduto.html">
+            <h3>Nome do produto</h3>
+            <img src="img/img12.jpg" alt="Produto 5">
+            <p>Descrição do Produto 5</p>
+            <p>R$ 000,00</p>
+          </a>
+        </div>
+        <div class="product">
+          <a href="DetalhesProduto.html">
+            <h3>Nome do produto</h3>
+            <img src="img/img3.jpg" alt="Produto 6">
+            <p>Descrição do Produto 6</p>
+            <p>R$ 000,00</p>
+          </a>
+        </div>
+        <div class="product">
+          <a href="DetalhesProduto.html">
+            <h3>Nome do produto</h3>
+            <img src="img/img0.jpg" alt="Produto 7">
+            <p>Descrição do Produto 7</p>
+            <p>R$ 000,00</p>
+          </a>
+        </div>
+        <div class="product">
+          <a href="DetalhesProduto.html">
+            <h3>Nome do produto</h3>
+            <img src="img/img9.jpg" alt="Produto 8">
+            <p>Descrição do Produto 8</p>
+            <p>R$ 000,00</p>
+          </a>
+        </div>
+        <div class="product">
+          <a href="DetalhesProduto.html">
+            <h3>Nome do produto</h3>
+            <img src="img/img11.jpg" alt="Produto 9">
+            <p>Descrição do Produto 9</p>
+            <p>R$ 000,00</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    &copy; 2023 Loja de brinquedos. Todos os direitos reservados.
+    <p><br>Adriana Costa, Patrícia Barcellos.<br>
+      FATEC Itaquera "Professor Miguel Reale"<br>
+      Projeto Integrador: Loja de Briquedos<br>
+    Disciplinas: Desenvolvimento Wed III, Interação Humano Computador, Banco de Dandos Não Relacional</p>
+  </footer>
+  
+  <script>
+    function toggleSidebar() {
+    var sidebar = document.getElementById('sidebar');
+    sidebar.style.display = (sidebar.style.display === 'none' || sidebar.style.display === '') ? 'block' : 'none';
+  }
+
+/*  function toggleSubmenu(submenuId) {
+    var submenu = document.getElementById(submenuId + 'SubMenu');
+    submenu.style.display = (submenu.style.display === 'none') ? 'block' : 'none';
+  }*/
+
+  function carregarGaleria(categoria) {
+  // informa uma API para interagir com o MongoDB
+  const url = `br.com.uaubrinquedos/categorias/${categoria}`;
+
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro na solicitação: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Processãndo os dados recebidos do banco de dados
+      console.log('catalogoBrinquedo1:', data);
+      // chamando a proxima função para manipular a galeria
+      exibirGaleria(data);
+    })
+    .catch(error => {
+      console.error('Erro ao carregar galeria:', error.message);
+    });
+}
+
+	function exibirGaleria(data) {
+  		// Implemente a lógica para exibir a galeria com base nos dados recebidos
+  		alert('Dados retornaram do banco de dados.');
+	}
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Página de Inserção de Produtos">
+  <meta name="keywords" content="HTML, CSS, JavaScript, Abas, Formulário">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área Administrativa</title>
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="script/script.js"></script>  
+</head>
+      
+<body>
+  
+    <header>
+        <div>
+          <img src="img/logo.png".png" alt="Logo">
+        </div>
+        <div class="logo-name">
+          <h1>Uau Brinquedo</h1>
+        </div>
+        <div class="login-area">
+          <input type="text" class="login-input" placeholder="Usuário">
+          <button class="login-button">Login</button>
+        </div>
+        <div class="menu-icon" onclick="toggleSidebar()">
+          &#9776; <!-- Unicode para o ícone de menu -->
+        </div>
+      </header>
+  
+
+  <div style="display: flex;">
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="index.html"><h4>HOME</h4></a></li>
+            <li><a href="index.html"><h4>CATEGORIAS</h4></a>
+            <ul>
+              <li><a href="index.html" onclick="carregarGaleria('todas')">Todas</a></li>
+              <li><a href="index.html" onclick="carregarGaleria('bonecas')">Bonecas</a></li>
+              <li><a href="index.html" onclick="carregarGaleria('caminhoes')">Caminhões</a></li>
+              <li><a href="index.html" onclick="carregarGaleria('cozinhas')">Cozinhas</a></li>
+              <li><a href="index.html" onclick="carregarGaleria('helicopteros')">Helicópteros</a></li>
+              <li><a href="index.html" onclick="carregarGaleria('jogos')">Jogos</a></li>
+              <li><a href="index.html" onclick="carregarGaleria('motos')">Motos</a></li>
+              <li><a href="index.html" onclick="carregarGaleria('Praia')">Praia</a></li>
+              <li><a href="index.html" onclick="carregarGaleria('tratores')">Tratores</a></li>
+            </ul></li>
+    
+            <li><a href="pesquisaprodutos.html"><h4>PRODUTOS</h4></a>
+            <ul>
+              <li><a href="pesquisaprodutos.html">Consultar Produto</a></li>
+              <li><a href="listadeprodutos.html">Listar Produtos</a></li>
+            </ul></li>
+    
+            <li><a href="administrativa.html"><h4>AREA ÁDMINISTRATIVA</h4></a>
+            <ul>
+              <li><a href="inserir.html" onclick="redirectToAdminPage('inserir')">Inserir Produto</a></li>
+              <li><a href="alterar.html" onclick="redirectToAdminPage('alterar')">Alterar Produto</a></li>
+              <li><a href="excluir.html" onclick="redirectToAdminPage('excluir')">Excluir Produto</a></li>
+            </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="flexbox">
+      
+        <div class="main-content-item">
+          <h2>Inserir Produto</h2>
+
+          <!-- Abas -->
+          <ul class="tabs">
+            <li class="tab-link" onclick="openTab('codigo')">Código</li>
+            <li class="tab-link" onclick="openTab('descricao')">Descrição</li>
+            <li class="tab-link" onclick="openTab('categoria')">Categoria</li>
+            <li class="tab-link" onclick="openTab('marca')">Marca</li>
+            <li class="tab-link" onclick="openTab('foto')">Foto</li>
+            <li class="tab-link" onclick="openTab('valor')">Valor</li>
+            <li class="tab-link" onclick="openTab('detalhes')">Detalhes</li>
+          </ul>
+
+          <!-- Conteúdo das Abas -->
+          <div id="codigo" class="tab-content active">
+            <!-- Conteúdo da aba Código -->
+            <p><br></p>
+            <label for="codigoProduto">Código do Produto:</label>
+            <input type="text" id="codigoProduto" name="codigoProduto">
+          </div>
+
+          <div id="descricao" class="tab-content">
+            <!-- Conteúdo da aba Descrição -->
+            <p><br></p>
+            <label for="descricaoProduto">Descrição do Produto:</label>
+            <textarea id="descricaoProduto" name="descricaoProduto"></textarea>
+          </div>
+
+          <div id="categoria" class="tab-content">
+            <!-- Conteúdo da aba Categoria -->
+            <p><br></p>
+            <label for="categoriaProduto">Categoria do Produto:</label>
+            <input type="text" id="categoriaProduto" name="categoriaProduto">
+          </div>
+
+          <div id="marca" class="tab-content">
+            <!-- Conteúdo da aba Marca -->
+            <p><br></p>
+            <label for="marcaProduto">Marca do Produto:</label>
+            <input type="text" id="marcaProduto" name="marcaProduto">
+          </div>
+
+          <div id="foto" class="tab-content">
+            <!-- Conteúdo da aba Foto -->
+            <p><br></p>
+            <label for="fotoProduto">Foto do Produto:</label>
+            <input type="file" id="fotoProduto" name="fotoProduto">
+          </div>
+
+          <div id="valor" class="tab-content">
+            <!-- Conteúdo da aba Valor -->
+            <p><br></p>
+            <label for="valorProduto">Valor do Produto:</label>
+            <input type="text" id="valorProduto" name="valorProduto">
+          </div>
+
+          <div id="detalhes" class="tab-content">
+            <!-- Conteúdo da aba Detalhes -->
+            <p><br></p>
+            <label for="detalhesProduto">Detalhes do Produto:</label>
+            <textarea id="detalhesProduto" name="detalhesProduto"></textarea>
+          </div>
+          
+          <p><br></p>
+          <button type="button" onclick="submitForm()">Inserir Produto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <!-- Conteúdo do rodapé -->
+  </footer>
+
+  <footer>
+    &copy; 2023 Loja de brinquedos. Todos os direitos reservados.
+    <p><br>Adriana Costa, Artur Silvestre, Gabriel Possi, Higor Vieira, Patrícia Barcellos.<br>
+      FATEC Itaquera "Professor Miguel Reale"<br>
+      Projeto Integrador: Loja de Brinquedos<br>
+      Disciplinas: Desenvolvimento Web III, Interação Humano Computador, Banco de Dados Não Relacional</p>
+  </footer>
+</body>
+</html>
